@@ -1,24 +1,22 @@
 package rifqimuhammadaziz;
 
 import com.github.javafaker.Faker;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import rifqimuhammadaziz.model.User;
-import rifqimuhammadaziz.service.UserServiceImpl;
+import rifqimuhammadaziz.service.UserDaoImpl;
 
-import javax.swing.*;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceTest {
 
-    public UserServiceImpl userService;
+    public UserDaoImpl userService;
     private List<User> users;
 
     @Test
     public void testAddData() throws SQLException, ClassNotFoundException {
         User user = new User();
-        userService = new UserServiceImpl();
+        userService = new UserDaoImpl();
 
         user.setUsername("xenosty2");
         user.setPassword("xenosty1");
@@ -37,7 +35,7 @@ public class UserServiceTest {
     @Test
     public void testDatabaseSeeder() throws SQLException, ClassNotFoundException {
         User user = new User();
-        userService = new UserServiceImpl();
+        userService = new UserDaoImpl();
 
         for (int i = 0; i < 100; i++) {
             Faker faker = new Faker();

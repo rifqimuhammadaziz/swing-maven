@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserServiceImpl implements DaoService<User> {
+public class UserDaoImpl implements DaoService<User> {
 
     String imagePath;
     String USER_NONACTIVE = "NON-ACTIVE";
