@@ -27,9 +27,7 @@ public class UserServiceTest {
         user.setStatus("ACTIVE");
         System.out.println(user);
 
-        int savedUser = userService.addData(user);
-
-        Assertions
+        userService.addData(user);
     }
 
     @Test
