@@ -6,7 +6,9 @@ import rifqimuhammadaziz.model.User;
 import rifqimuhammadaziz.service.UserDaoImpl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class UserServiceTest {
 
@@ -18,13 +20,33 @@ public class UserServiceTest {
         User user = new User();
         userService = new UserDaoImpl();
 
-        user.setUsername("xenosty2");
-        user.setPassword("xenosty1");
-        user.setFullName("Rifqi Muhammad Aziz");
-        user.setGender("MALE");
-        user.setAddress("Tegal");
-        user.setPhoneNumber("081902401999");
-        user.setStatus("ACTIVE");
+        Faker faker = new Faker();
+        String username = faker.name().username();
+        String fullName = faker.name().fullName();
+        String address = faker.address().streetAddress();
+        String phonenumber = faker.phoneNumber().cellPhone();
+
+        Random r1 = new Random();
+        List<String> listGender = new ArrayList();
+        listGender.add("MALE");
+        listGender.add("FEMALE");
+        int randomGender = r1.nextInt(listGender.size());
+        String gender = listGender.get(randomGender);
+
+        Random r2 = new Random();
+        List<String> listStatus = new ArrayList();
+        listStatus.add("ACTIVE");
+        listStatus.add("NON-ACTIVE");
+        int randomitem = r1.nextInt(listStatus.size());
+        String status = listStatus.get(randomitem);
+
+        user.setUsername(username);
+        user.setPassword(username);
+        user.setFullName(fullName);
+        user.setGender(gender);
+        user.setAddress(address);
+        user.setPhoneNumber(phonenumber);
+        user.setStatus(status);
         System.out.println(user);
 
         userService.addData(user);
