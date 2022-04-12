@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class EditForm extends JFrame {
-    private JPanel rootPanel;
+    private JPanel nganu;
     private JTextField txtFullName;
     private JRadioButton maleRadioButton;
     private JRadioButton femaleRadioButton;
@@ -23,7 +23,8 @@ public class EditForm extends JFrame {
     private User selectedUser;
 
     public EditForm(User users) {
-        setContentPane(rootPanel);
+        setContentPane(nganu);
+        pack();
 
         userDao = new UserDaoImpl();
 
@@ -31,9 +32,9 @@ public class EditForm extends JFrame {
         txtUsername.setText(users.getUsername());
         txtUsername.setEnabled(false);
         txtFullName.setText(users.getFullName());
-        if (users.getGender().equals("Male")) {
+        if (users.getGender().equals("MALE")) {
             maleRadioButton.setSelected(true);
-        } else if (users.getGender().equals("Female")) {
+        } else if (users.getGender().equals("FEMALE")) {
             femaleRadioButton.setSelected(true);
         }
         txtAddress.setText(users.getAddress());
@@ -51,7 +52,7 @@ public class EditForm extends JFrame {
                     txtAddress.getText().trim().isEmpty() ||
                     txtPhonenumber.getText().trim().isEmpty() ||
                     cbStatus.getSelectedItem() == null) {
-                JOptionPane.showMessageDialog(rootPanel, "Please fill form correctly!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(nganu, "Please fill form correctly!", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 users.setFullName(txtFullName.getText().trim().isEmpty() ? null : txtFullName.getText());
                 users.setAddress(txtAddress.getText().trim().isEmpty() ? null : txtAddress.getText());

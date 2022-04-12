@@ -37,7 +37,7 @@ public class UserServiceTest {
         List<String> listStatus = new ArrayList();
         listStatus.add("ACTIVE");
         listStatus.add("NON-ACTIVE");
-        int randomitem = r1.nextInt(listStatus.size());
+        int randomitem = r2.nextInt(listStatus.size());
         String status = listStatus.get(randomitem);
 
         user.setUsername(username);
@@ -53,6 +53,16 @@ public class UserServiceTest {
     }
 
     @Test
+    public void testGetAll() throws SQLException, ClassNotFoundException {
+        userService = new UserDaoImpl();
+        Iterable<User> users = userService.getAll();
+
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
     public void testDatabaseSeeder() throws SQLException, ClassNotFoundException {
         User user = new User();
         userService = new UserDaoImpl();
@@ -64,13 +74,27 @@ public class UserServiceTest {
             String address = faker.address().streetAddress();
             String phonenumber = faker.phoneNumber().cellPhone();
 
+            Random r1 = new Random();
+            List<String> listGender = new ArrayList();
+            listGender.add("MALE");
+            listGender.add("FEMALE");
+            int randomGender = r1.nextInt(listGender.size());
+            String gender = listGender.get(randomGender);
+
+            Random r2 = new Random();
+            List<String> listStatus = new ArrayList();
+            listStatus.add("ACTIVE");
+            listStatus.add("NON-ACTIVE");
+            int randomitem = r2.nextInt(listStatus.size());
+            String status = listStatus.get(randomitem);
+
             user.setUsername(username);
             user.setPassword(username);
             user.setFullName(name);
-            user.setGender("MALE");
+            user.setGender(gender);
             user.setAddress(address);
             user.setPhoneNumber(phonenumber);
-            user.setStatus("ACTIVE");
+            user.setStatus(status);
             System.out.println(user);
             userService.addData(user);
         }

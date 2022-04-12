@@ -71,7 +71,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="39769" class="javax.swing.JButton" binding="loginButton" default-binding="true">
+          <component id="39769" class="javax.swing.JButton" binding="btnLogin">
             <constraints/>
             <properties>
               <text value="Login"/>

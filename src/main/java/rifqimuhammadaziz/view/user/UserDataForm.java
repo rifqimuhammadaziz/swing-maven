@@ -40,6 +40,7 @@ public class UserDataForm extends JFrame{
         tableUser.setModel(userTableModel);
         tableUser.setAutoCreateRowSorter(true);
 
+
         // Select row to delete
         tableUser.getSelectionModel().addListSelectionListener(e -> {
             if (!tableUser.getSelectionModel().isSelectionEmpty()) {
@@ -51,7 +52,7 @@ public class UserDataForm extends JFrame{
             }
         });
 
-         // Double click row to edit
+        // Double click row to edit
         tableUser.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -174,6 +175,4 @@ public class UserDataForm extends JFrame{
             return Object.class;
         }
     }
-
-
 }

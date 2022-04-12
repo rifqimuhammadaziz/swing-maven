@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class LoginForm extends JFrame{
     private JTextField txtUsername;
     private JTextField txtPassword;
-    private JButton loginButton;
+    private JButton btnLogin;
     private JButton cancelButton;
     private JPanel rootPanel;
 
@@ -20,7 +20,7 @@ public class LoginForm extends JFrame{
         userDao = new UserDaoImpl();
 
         // Button Login
-        loginButton.addActionListener(e -> {
+        btnLogin.addActionListener(e -> {
             if (txtUsername.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPanel, "Please fill form correctly!", "Error", JOptionPane.ERROR_MESSAGE);
             } else {

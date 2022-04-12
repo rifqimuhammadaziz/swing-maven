@@ -104,7 +104,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="99089" class="javax.swing.JComboBox" binding="cbDepartment">
+              <component id="99089" class="javax.swing.JComboBox" binding="comboDepartment">
                 <constraints/>
                 <properties>
                   <enabled value="false"/>

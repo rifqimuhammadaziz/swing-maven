@@ -19,7 +19,7 @@ public class MainForm extends JFrame{
     private JTextField txtFirstName;
     private JTextField txtLastName;
     private JTextArea txtAddress;
-    private JComboBox<Department> cbDepartment;
+    private JComboBox<Department> comboDepartment;
     private JButton btnAddDepartment;
     private JButton btnUpdate;
     private JButton btnReset;
@@ -66,7 +66,7 @@ public class MainForm extends JFrame{
 
         // get department data and add to combo box
         departmentComboBoxModel = new DefaultComboBoxModel<>(departments.toArray(new Department[0]));
-        cbDepartment.setModel(departmentComboBoxModel);
+        comboDepartment.setModel(departmentComboBoxModel);
 
         // get student data and add to table
         studentTableModel = new StudentTableModel(students);
@@ -96,14 +96,14 @@ public class MainForm extends JFrame{
         btnSave.addActionListener(e -> {
             if (    txtFirstName.getText().trim().isEmpty() ||
                     txtLastName.getText().trim().isEmpty() ||
-                    cbDepartment.getSelectedItem() == null) {
+                    comboDepartment.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(rootPanel, "Please fill form correctly!", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 Student student = new Student();
                 student.setFirstName(txtFirstName.getText());
                 student.setLastName(txtLastName.getText().trim().isEmpty() ? null : txtLastName.getText());
                 student.setAddress(txtAddress.getText());
-                student.setDepartment((Department) cbDepartment.getSelectedItem());
+                student.setDepartment((Department) comboDepartment.getSelectedItem());
                 try {
                     if (studentDao.addData(student) == 1) {
                         students.clear();
@@ -134,13 +134,13 @@ public class MainForm extends JFrame{
         btnUpdate.addActionListener(e -> {
             if (    txtID.getText().trim().isEmpty() ||
                     txtFirstName.getText().trim().isEmpty() ||
-                    cbDepartment.getSelectedItem() == null) {
+                    comboDepartment.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(rootPanel, "Please fill form correctly!", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 selectedStudent.setFirstName(txtFirstName.getText());
                 selectedStudent.setLastName(txtLastName.getText().trim().isEmpty() ? null : txtLastName.getText());
                 selectedStudent.setAddress(txtAddress.getText());
-                selectedStudent.setDepartment((Department) cbDepartment.getSelectedItem());
+                selectedStudent.setDepartment((Department) comboDepartment.getSelectedItem());
                 try {
                     int validate = JOptionPane.showConfirmDialog(
                             null,
@@ -178,7 +178,7 @@ public class MainForm extends JFrame{
                     txtFirstName.setText(selectedStudent.getFirstName());
                     txtLastName.setText(selectedStudent.getLastName() != null ? selectedStudent.getLastName() : "");
                     txtAddress.setText(selectedStudent.getAddress());
-                    cbDepartment.setSelectedItem(selectedStudent.getDepartment());
+                    comboDepartment.setSelectedItem(selectedStudent.getDepartment());
 
                     txtID.setEnabled(false);
                     btnSave.setEnabled(false);
@@ -243,8 +243,8 @@ public class MainForm extends JFrame{
         txtFirstName.setEnabled(false);
         txtLastName.setEnabled(false);
         txtAddress.setEnabled(false);
-        cbDepartment.setEnabled(false);
-        cbDepartment.setSelectedItem(null);
+        comboDepartment.setEnabled(false);
+        comboDepartment.setSelectedItem(null);
 
         btnAddNew.setText("Add New");
 
@@ -264,7 +264,7 @@ public class MainForm extends JFrame{
         txtFirstName.setEnabled(true);
         txtLastName.setEnabled(true);
         txtAddress.setEnabled(true);
-        cbDepartment.setEnabled(true);
+        comboDepartment.setEnabled(true);
 
         btnAddNew.setText("Cancel");
 
@@ -293,7 +293,7 @@ public class MainForm extends JFrame{
         txtFirstName.setEnabled(true);
         txtLastName.setEnabled(true);
         txtAddress.setEnabled(true);
-        cbDepartment.setEnabled(true);
+        comboDepartment.setEnabled(true);
 
         txtFirstName.grabFocus();
     }
