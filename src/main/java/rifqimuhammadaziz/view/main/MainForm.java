@@ -177,7 +177,9 @@ public class MainForm extends JFrame{
                     txtFirstName.setText(selectedStudent.getFirstName());
                     txtLastName.setText(selectedStudent.getLastName() != null ? selectedStudent.getLastName() : "");
                     txtAddress.setText(selectedStudent.getAddress());
-                    comboDepartment.setSelectedItem(selectedStudent.getDepartment());
+                    comboDepartment.getModel().setSelectedItem(selectedStudent.getDepartment());
+                    System.out.println(selectedStudent.getDepartment());
+
 
                     txtID.setEnabled(false);
                     btnSave.setEnabled(false);
