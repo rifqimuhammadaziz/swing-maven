@@ -74,7 +74,6 @@ public class DepartmentDataForm extends Container {
                         selectedDepartment.setName(first);
                     }
                 }
-
             }
         });
 
