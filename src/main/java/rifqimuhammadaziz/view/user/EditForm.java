@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class EditForm extends JFrame {
-    private JPanel nganu;
+    private JPanel rootPanel;
     private JTextField txtFullName;
     private JRadioButton maleRadioButton;
     private JRadioButton femaleRadioButton;
@@ -20,15 +20,14 @@ public class EditForm extends JFrame {
     private JButton btnCancel;
 
     private UserDaoImpl userDao;
-    private User selectedUser;
 
     public EditForm(User users) {
-        setContentPane(nganu);
+        setContentPane(rootPanel);
         pack();
 
         userDao = new UserDaoImpl();
 
-        // ========== GET DATA FROM TABLE ==========
+        // Get Data From Table
         txtUsername.setText(users.getUsername());
         txtUsername.setEnabled(false);
         txtFullName.setText(users.getFullName());
@@ -52,7 +51,7 @@ public class EditForm extends JFrame {
                     txtAddress.getText().trim().isEmpty() ||
                     txtPhonenumber.getText().trim().isEmpty() ||
                     cbStatus.getSelectedItem() == null) {
-                JOptionPane.showMessageDialog(nganu, "Please fill form correctly!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPanel, "Please fill form correctly!", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 users.setFullName(txtFullName.getText().trim().isEmpty() ? null : txtFullName.getText());
 

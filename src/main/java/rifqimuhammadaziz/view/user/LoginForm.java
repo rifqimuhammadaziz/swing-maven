@@ -48,6 +48,11 @@ public class LoginForm extends JFrame{
 
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         JFrame frame = new JFrame("Login Form");
         frame.setContentPane(new LoginForm().rootPanel);
         frame.pack();

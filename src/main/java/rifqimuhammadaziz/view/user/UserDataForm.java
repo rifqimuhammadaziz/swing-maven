@@ -1,21 +1,31 @@
 package rifqimuhammadaziz.view.user;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import rifqimuhammadaziz.App;
 import rifqimuhammadaziz.model.User;
 import rifqimuhammadaziz.model.table.UserTableModel;
 import rifqimuhammadaziz.service.UserDaoImpl;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class UserDataForm extends JFrame{
     public JTable tableUser;
     private JButton btnDelete;
     private JButton btnRefresh;
     private JPanel rootPanel;
+    private JButton button1;
 
     private UserDaoImpl userDao;
     private List<User> users;
@@ -119,14 +129,18 @@ public class UserDataForm extends JFrame{
         });
     }
 
-    public static void main(String[] args) {
-//        try {
-//             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); // WINDOWS LOOK AND FEEL
-//             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); // METAL
-//             UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel"); // MOTIF LOOK AND FEEL
-//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-//            e.printStackTrace();
-//        }
+    public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+//        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); // WINDOWS LOOK AND FEEL
+//        UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); // METAL
+//        UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel"); // MOTIF LOOK AND FEEL
+        UIManager.setLookAndFeel(new FlatLightLaf());
+        UIManager.put( "Button.arc", 999 );
+        UIManager.put( "Component.arc", 999 );
+        UIManager.put( "ProgressBar.arc", 999 );
+        UIManager.put( "TextComponent.arc", 999 );
+        UIManager.put( "Component.focusWidth", 1 );
+
         JFrame frame = new JFrame("User Data Form");
         frame.setContentPane(new UserDataForm().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
