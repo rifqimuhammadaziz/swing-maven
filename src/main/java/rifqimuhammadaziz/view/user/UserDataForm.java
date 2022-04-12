@@ -40,7 +40,6 @@ public class UserDataForm extends JFrame{
         tableUser.setModel(userTableModel);
         tableUser.setAutoCreateRowSorter(true);
 
-
         // Select row to delete
         tableUser.getSelectionModel().addListSelectionListener(e -> {
             if (!tableUser.getSelectionModel().isSelectionEmpty()) {
@@ -107,8 +106,15 @@ public class UserDataForm extends JFrame{
         });
 
         btnRefresh.addActionListener(e -> {
-//            userTableModel.fireTableDataChanged();
-            tableUser.repaint();
+            users.clear();
+            try {
+                users.addAll(userDao.getAll());
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            userTableModel.fireTableDataChanged();
             JOptionPane.showMessageDialog(null, "Table Refreshed", "Load Data", JOptionPane.INFORMATION_MESSAGE);
         });
     }
@@ -128,6 +134,7 @@ public class UserDataForm extends JFrame{
         frame.setLocationRelativeTo(null);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
+
     }
 
     private static class UserTableModel extends AbstractTableModel {

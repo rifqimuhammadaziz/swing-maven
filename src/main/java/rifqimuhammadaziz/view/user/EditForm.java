@@ -55,6 +55,13 @@ public class EditForm extends JFrame {
                 JOptionPane.showMessageDialog(nganu, "Please fill form correctly!", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 users.setFullName(txtFullName.getText().trim().isEmpty() ? null : txtFullName.getText());
+
+                if (maleRadioButton.isSelected()) {
+                    users.setGender("MALE");
+                } else if (femaleRadioButton.isSelected()) {
+                    users.setGender("FEMALE");
+                }
+
                 users.setAddress(txtAddress.getText().trim().isEmpty() ? null : txtAddress.getText());
                 users.setPhoneNumber(txtPhonenumber.getText().trim().isEmpty() ? null : txtPhonenumber.getText());
                 users.setStatus((String) cbStatus.getSelectedItem());
@@ -68,9 +75,9 @@ public class EditForm extends JFrame {
                     );
                     if (validate == JOptionPane.YES_OPTION) {
                         if (userDao.updateData(users) == 1) {
-                           userDao.updateData(users);
-                           JOptionPane.showMessageDialog(this, "User : " + txtUsername.getText(), "Update Success", JOptionPane.INFORMATION_MESSAGE);
-                           dispose();
+                            userDao.updateData(users);
+                            JOptionPane.showMessageDialog(this, "User : " + txtUsername.getText(), "Update Success", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
                         }
                     }
                 } catch (SQLException | ClassNotFoundException ex) {
