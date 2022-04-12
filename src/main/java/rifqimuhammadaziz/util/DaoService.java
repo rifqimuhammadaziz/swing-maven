@@ -9,6 +9,8 @@ public interface DaoService<T> {
 
     List<T> getAll() throws SQLException, ClassNotFoundException;
 
+    T findById(Integer id) throws SQLException, ClassNotFoundException;
+
     int addData(T t) throws SQLException, ClassNotFoundException;
 
     int updateData(T t) throws SQLException, ClassNotFoundException;

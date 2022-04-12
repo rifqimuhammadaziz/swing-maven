@@ -43,6 +43,12 @@ public class UserDaoImpl implements DaoService<User> {
     }
 
     @Override
+    public User findById(Integer id) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+
+    @Override
     public int addData(User user) throws SQLException, ClassNotFoundException {
         int result = 0;
         String QUERY = "INSERT INTO user(username, password, fullname, gender, address, phonenumber, image, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -141,21 +147,22 @@ public class UserDaoImpl implements DaoService<User> {
         return result;
     }
 
-    public int findById(Integer id) throws SQLException, ClassNotFoundException {
-        int result = 0;
-        String QUERY = "SELECT id, username, fullname, gender, address, phonenumber, status FROM user WHERE id = ?";
-        try (Connection connection = MySQLConnection.createConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
-                ps.setInt(1, id);
 
-                if (ps.executeUpdate() != 0) {
-                    connection.commit();
-                    result = 1;
-                } else {
-                    connection.rollback();
-                }
-            }
-        }
-        return result;
-    }
+//    public int findById(Integer id) throws SQLException, ClassNotFoundException {
+//        int result = 0;
+//        String QUERY = "SELECT id, username, fullname, gender, address, phonenumber, status FROM user WHERE id = ?";
+//        try (Connection connection = MySQLConnection.createConnection()) {
+//            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
+//                ps.setInt(1, id);
+//
+//                if (ps.executeUpdate() != 0) {
+//                    connection.commit();
+//                    result = 1;
+//                } else {
+//                    connection.rollback();
+//                }
+//            }
+//        }
+//        return result;
+//    }
 }

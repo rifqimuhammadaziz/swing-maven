@@ -33,6 +33,26 @@ public class DepartmentDaoImpl implements DaoService<Department> {
     }
 
     @Override
+    public Department findById(Integer id) throws SQLException, ClassNotFoundException {
+        Department department = null;
+        String QUERY = "SELECT id, name FROM department WHERE id=?";
+        try (Connection connection = MySQLConnection.createConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
+                ps.setInt(1, id);
+                try (ResultSet rs = ps.executeQuery()) { // result from query
+                    while (rs.next()) {
+                        department = new Department();
+                        department.setId(rs.getInt("id"));
+                        department.setName(rs.getString("name"));
+                    }
+                }
+            }
+        }
+        return department;
+    }
+
+
+    @Override
     public int addData(Department department) throws SQLException, ClassNotFoundException {
         int result = 0;
         String QUERY = "INSERT INTO department(name) VALUES(?)";
@@ -90,7 +110,7 @@ public class DepartmentDaoImpl implements DaoService<Department> {
     }
 
     // Get Single Data
-    public Department getDepartment(String departmentName) throws SQLException, ClassNotFoundException {
+    public Department findByName(String departmentName) throws SQLException, ClassNotFoundException {
         Department department = null;
         String QUERY = "SELECT id, name FROM department WHERE name=?";
         try (Connection connection = MySQLConnection.createConnection()) {
