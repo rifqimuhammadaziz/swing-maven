@@ -173,7 +173,7 @@ public class MainForm extends JFrame{
                     enableTextfield();
                     btnAddNew.setText("Cancel");
 
-                    txtID.setText(selectedStudent.getId());
+                    txtID.setText(String.valueOf(selectedStudent.getId()));
                     txtFirstName.setText(selectedStudent.getFirstName());
                     txtLastName.setText(selectedStudent.getLastName() != null ? selectedStudent.getLastName() : "");
                     txtAddress.setText(selectedStudent.getAddress());

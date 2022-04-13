@@ -15,10 +15,12 @@ public class StudentServiceTest {
 
     private StudentDaoImpl studentDao;
     private List<Student> students;
+    Student student = new Student();
 
     @Test
     public void testAddData() throws SQLException, ClassNotFoundException {
         Student student = new Student();
+        Department department = new Department();
         studentDao = new StudentDaoImpl();
 
         Faker faker = new Faker();
@@ -36,9 +38,27 @@ public class StudentServiceTest {
         student.setFirstName(first_name);
         student.setLastName(last_name);
         student.setAddress(address);
-        student.setDepartment(new Department());
+        student.setDepartment(new Department(1, "Testing"));
         System.out.println(student);
 
         studentDao.addData(student);
+    }
+
+    @Test
+    public void testGetAll() throws SQLException, ClassNotFoundException {
+
+        Iterable<Student> students = studentDao.getAll();
+
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+
+    @Test
+    public void testGetSingle() throws SQLException, ClassNotFoundException {
+        studentDao = new StudentDaoImpl();
+        Integer id = 1;
+        student = studentDao.findById(1);
+        System.out.println(student);
     }
 }
