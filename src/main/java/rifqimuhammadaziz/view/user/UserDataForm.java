@@ -102,6 +102,7 @@ public class UserDataForm extends JFrame{
                     if (userDao.deleteData(selectedUser) == 1) {
                         users.clear();
                         users.addAll(userDao.getAll());
+                        userTableModel.fireTableDataChanged();
                     }
                 } else if (validate == JOptionPane.NO_OPTION) {
                     userTableModel.fireTableDataChanged();
@@ -130,13 +131,13 @@ public class UserDataForm extends JFrame{
 //        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); // WINDOWS LOOK AND FEEL
 //        UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); // METAL
 //        UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel"); // MOTIF LOOK AND FEEL
-//        UIManager.setLookAndFeel(new FlatLightLaf());
-//        UIManager.put( "Button.arc", 999 );
-//        UIManager.put( "Component.arc", 999 );
-//        UIManager.put( "ProgressBar.arc", 999 );
-//        UIManager.put( "TextComponent.arc", 999 );
-//        UIManager.put( "Component.focusWidth", 1 );
-//        UIManager.put( "Table.showHorizontalLines", true);
+        UIManager.setLookAndFeel(new FlatLightLaf());
+        UIManager.put( "Button.arc", 999 );
+        UIManager.put( "Component.arc", 999 );
+        UIManager.put( "ProgressBar.arc", 999 );
+        UIManager.put( "TextComponent.arc", 999 );
+        UIManager.put( "Component.focusWidth", 1 );
+        UIManager.put( "Table.showHorizontalLines", true);
 
         JFrame frame = new JFrame("User Data Form");
         frame.setContentPane(new UserDataForm().rootPanel);

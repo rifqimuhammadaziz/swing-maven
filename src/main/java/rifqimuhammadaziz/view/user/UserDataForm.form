@@ -39,9 +39,8 @@
           <component id="aca08" class="javax.swing.JButton" binding="addButton" custom-create="true" default-binding="true">
             <constraints/>
             <properties>
-              <icon value="icon/icons8_refresh_30px.png"/>
-              <label value=""/>
-              <text value=""/>
+              <label value="Add"/>
+              <text value="Add"/>
             </properties>
           </component>
           <component id="1fd3d" class="javax.swing.JButton" binding="searchButton" default-binding="true">
