@@ -28,7 +28,7 @@ public class StudentDaoImpl implements DaoService<Student> {
                         department.setName(rs.getString("name"));
 
                         Student student = new Student();
-                        student.setId(rs.getString("id"));
+                        student.setId(rs.getInt("id"));
                         student.setFirstName(rs.getString("first_name"));
                         student.setLastName(rs.getString("last_name"));
                         student.setAddress(rs.getString("address"));
@@ -43,7 +43,23 @@ public class StudentDaoImpl implements DaoService<Student> {
 
     @Override
     public Student findById(Integer id) throws SQLException, ClassNotFoundException {
-        return null;
+        Student student = new Student();
+        String QUERY = "SELECT id, first_name, last_name, address, department_id FROM student WHERE id = ?";
+        try (Connection connection = MySQLConnection.createConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
+                ps.setInt(1, id);
+                try (ResultSet rs = ps.executeQuery()){
+                    while (rs.next()) {
+                        student.setId(rs.getInt("id"));
+                        student.setFirstName(rs.getString("first_name"));
+                        student.setLastName(rs.getString("last_name"));
+                        student.setAddress(rs.getString("address"));
+                        student.setDepartment((Department) rs.getObject("department_id"));
+                    }
+                }
+            }
+        }
+        return student;
     }
 
     @Override
@@ -77,7 +93,7 @@ public class StudentDaoImpl implements DaoService<Student> {
                 ps.setString(2, student.getLastName());
                 ps.setString(3, student.getAddress());
                 ps.setInt(4, student.getDepartment().getId());
-                ps.setString(5, student.getId());
+                ps.setInt(5, student.getId());
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
@@ -95,7 +111,7 @@ public class StudentDaoImpl implements DaoService<Student> {
         String QUERY = "DELETE FROM student WHERE id = ?";
         try (Connection connection = MySQLConnection.createConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
-                ps.setString(1, student.getId());
+                ps.setInt(1, student.getId());
                 if (ps.executeUpdate() != 0) {
                     connection.commit();
                     result = 1;
