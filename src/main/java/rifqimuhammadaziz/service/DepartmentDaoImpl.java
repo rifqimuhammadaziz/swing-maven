@@ -51,6 +51,11 @@ public class DepartmentDaoImpl implements DaoService<Department> {
         return department;
     }
 
+    @Override
+    public List<Department> findByName(String name) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
 
     @Override
     public int addData(Department department) throws SQLException, ClassNotFoundException {
@@ -110,21 +115,21 @@ public class DepartmentDaoImpl implements DaoService<Department> {
     }
 
     // Get Single Data
-    public Department findByName(String departmentName) throws SQLException, ClassNotFoundException {
-        Department department = null;
-        String QUERY = "SELECT id, name FROM department WHERE name=?";
-        try (Connection connection = MySQLConnection.createConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
-                ps.setString(1, departmentName);
-                try (ResultSet rs = ps.executeQuery()) { // result from query
-                    while (rs.next()) {
-                        department = new Department();
-                        department.setId(rs.getInt("id"));
-                        department.setName(rs.getString("name"));
-                    }
-                }
-            }
-        }
-        return department;
-    }
+//    public Department findByName(String departmentName) throws SQLException, ClassNotFoundException {
+//        Department department = null;
+//        String QUERY = "SELECT id, name FROM department WHERE name=?";
+//        try (Connection connection = MySQLConnection.createConnection()) {
+//            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
+//                ps.setString(1, departmentName);
+//                try (ResultSet rs = ps.executeQuery()) { // result from query
+//                    while (rs.next()) {
+//                        department = new Department();
+//                        department.setId(rs.getInt("id"));
+//                        department.setName(rs.getString("name"));
+//                    }
+//                }
+//            }
+//        }
+//        return department;
+//    }
 }
