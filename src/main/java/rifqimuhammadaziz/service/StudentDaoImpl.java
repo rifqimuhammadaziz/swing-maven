@@ -95,6 +95,11 @@ public class StudentDaoImpl implements DaoService<Student> {
     }
 
     @Override
+    public List<Student> searchByName(String name) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     public int addData(Student student) throws SQLException, ClassNotFoundException {
         int result = 0;
         String QUERY = "INSERT INTO student(first_name, last_name, address, department_id) VALUES(?, ?, ?, ?)";

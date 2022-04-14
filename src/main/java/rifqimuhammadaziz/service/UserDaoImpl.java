@@ -90,6 +90,11 @@ public class UserDaoImpl implements DaoService<User> {
         return users;
     }
 
+    @Override
+    public List<User> searchByName(String name) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
 
     @Override
     public int addData(User user) throws SQLException, ClassNotFoundException {

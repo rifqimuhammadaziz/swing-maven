@@ -72,6 +72,25 @@ public class DepartmentDaoImpl implements DaoService<Department> {
         return departments;
     }
 
+    @Override
+    public List<Department> searchByName(String name) throws SQLException, ClassNotFoundException {
+        List<Department> departments = new ArrayList<>();
+        String QUERY = "SELECT * FROM department WHERE name LIKE %?%";
+        try (Connection connection = MySQLConnection.createConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
+                ps.setString(1, name);
+                try (ResultSet rs = ps.executeQuery()){
+                    while (rs.next()) {
+                        Department department = new Department();
+                        department.setId(rs.getInt("id"));
+                        department.setName(rs.getString("name"));
+                        departments.add(department);
+                    }
+                }
+            }
+        }
+        return departments;
+    }
 
     @Override
     public int addData(Department department) throws SQLException, ClassNotFoundException {
