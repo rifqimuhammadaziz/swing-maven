@@ -6,6 +6,8 @@ import rifqimuhammadaziz.model.table.UserTableModel;
 import rifqimuhammadaziz.service.UserDaoImpl;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -123,6 +125,24 @@ public class UserDataForm extends JFrame{
             }
             userTableModel.fireTableDataChanged();
             JOptionPane.showMessageDialog(null, "Table Refreshed", "Load Data", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        searchButton.addActionListener(e -> {
+            String searchUser = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Search User",
+                    "Testing",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            if (!searchUser.isEmpty()) {
+                try {
+                    List<User> found;
+                    found = userDao.searchByName(searchUser);
+                    System.out.println(found);
+                } catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
         });
     }
 

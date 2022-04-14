@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.service;
 
+import rifqimuhammadaziz.model.Department;
 import rifqimuhammadaziz.model.User;
 import rifqimuhammadaziz.util.DaoService;
 import rifqimuhammadaziz.util.MySQLConnection;
@@ -92,7 +93,27 @@ public class UserDaoImpl implements DaoService<User> {
 
     @Override
     public List<User> searchByName(String name) throws SQLException, ClassNotFoundException {
-        return null;
+        List<User> users = new ArrayList<>();
+        String QUERY = "SELECT * FROM user WHERE fullname LIKE \'%\' ? \'%\'";
+        try (Connection connection = MySQLConnection.createConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
+                ps.setString(1, name);
+                try (ResultSet rs = ps.executeQuery()){
+                    while (rs.next()) {
+                        User user = new User();
+                        user.setId(rs.getInt("id"));
+                        user.setUsername(rs.getString("username"));
+                        user.setFullName(rs.getString("fullname"));
+                        user.setGender(rs.getString("gender"));
+                        user.setAddress(rs.getString("address"));
+                        user.setPhoneNumber(rs.getString("phonenumber"));
+                        user.setStatus(rs.getString("status"));
+                        users.add(user);
+                    }
+                }
+            }
+        }
+        return users;
     }
 
 

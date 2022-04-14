@@ -3,6 +3,7 @@ package rifqimuhammadaziz;
 import com.github.javafaker.Faker;
 import org.junit.Test;
 import rifqimuhammadaziz.model.User;
+import rifqimuhammadaziz.service.DepartmentDaoImpl;
 import rifqimuhammadaziz.service.StudentDaoImpl;
 import rifqimuhammadaziz.service.UserDaoImpl;
 
@@ -77,6 +78,14 @@ public class UserServiceTest {
         userService = new UserDaoImpl();
         String name = "Amira Nolan";
         users = userService.findByName(name);
+        System.out.println(users);
+    }
+
+    @Test
+    public void testSearchByName() throws SQLException, ClassNotFoundException {
+        userService = new UserDaoImpl();
+        String name = "Amira";
+        users = userService.searchByName(name);
         System.out.println(users);
     }
 }
