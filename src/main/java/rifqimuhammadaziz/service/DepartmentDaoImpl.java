@@ -75,7 +75,7 @@ public class DepartmentDaoImpl implements DaoService<Department> {
     @Override
     public List<Department> searchByName(String name) throws SQLException, ClassNotFoundException {
         List<Department> departments = new ArrayList<>();
-        String QUERY = "SELECT * FROM department WHERE name LIKE %?%";
+        String QUERY = "SELECT * FROM department WHERE name LIKE \'%\' ? \'%\'";
         try (Connection connection = MySQLConnection.createConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
                 ps.setString(1, name);

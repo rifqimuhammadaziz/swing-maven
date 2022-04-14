@@ -52,4 +52,12 @@ public class DepartmentServiceTest {
         departments = departmentDao.findByName(name);
         System.out.println(departments);
     }
+
+    @Test
+    public void testSearchByName() throws SQLException, ClassNotFoundException {
+        departmentDao = new DepartmentDaoImpl();
+        String name = "Fakultas";
+        departments = departmentDao.searchByName(name);
+        System.out.println(departments);
+    }
 }
