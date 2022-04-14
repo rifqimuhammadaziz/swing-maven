@@ -1,6 +1,7 @@
 package rifqimuhammadaziz.service;
 
 import rifqimuhammadaziz.model.Department;
+import rifqimuhammadaziz.model.User;
 import rifqimuhammadaziz.util.DaoService;
 import rifqimuhammadaziz.util.MySQLConnection;
 
@@ -53,7 +54,22 @@ public class DepartmentDaoImpl implements DaoService<Department> {
 
     @Override
     public List<Department> findByName(String name) throws SQLException, ClassNotFoundException {
-        return null;
+        List<Department> departments = new ArrayList<>();
+        String QUERY = "SELECT * FROM department WHERE name = ?";
+        try (Connection connection = MySQLConnection.createConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
+                ps.setString(1, name);
+                try (ResultSet rs = ps.executeQuery()){
+                    while (rs.next()) {
+                        Department department = new Department();
+                        department.setId(rs.getInt("id"));
+                        department.setName(rs.getString("name"));
+                        departments.add(department);
+                    }
+                }
+            }
+        }
+        return departments;
     }
 
 
