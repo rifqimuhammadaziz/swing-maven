@@ -72,5 +72,11 @@ public class UserServiceTest {
         System.out.println(user);
     }
 
-
+    @Test
+    public void testFindByName() throws SQLException, ClassNotFoundException {
+        userService = new UserDaoImpl();
+        String name = "louvenia.kuvalis";
+        users = userService.findByName(name);
+        System.out.println(users);
+    }
 }
