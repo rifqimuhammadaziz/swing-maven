@@ -5,6 +5,7 @@ import org.junit.Test;
 import rifqimuhammadaziz.model.Department;
 import rifqimuhammadaziz.model.Student;
 import rifqimuhammadaziz.service.StudentDaoImpl;
+import rifqimuhammadaziz.service.UserDaoImpl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -60,5 +61,13 @@ public class StudentServiceTest {
         Integer id = 4;
         student = studentDao.findById(id);
         System.out.println(student);
+    }
+
+    @Test
+    public void testFindByName() throws SQLException, ClassNotFoundException {
+        studentDao = new StudentDaoImpl();
+        String firstName = "Rifqi";
+        students = studentDao.findByName(firstName);
+        System.out.println(students);
     }
 }
