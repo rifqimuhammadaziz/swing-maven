@@ -44,17 +44,21 @@ public class StudentDaoImpl implements DaoService<Student> {
     @Override
     public Student findById(Integer id) throws SQLException, ClassNotFoundException {
         Student student = new Student();
-        String QUERY = "SELECT id, first_name, last_name, address, department_id FROM student WHERE id = ?";
+        String QUERY = "SELECT * FROM student s JOIN department d ON s.department_id = d.id WHERE s.id = ?";
         try (Connection connection = MySQLConnection.createConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
                 ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()){
                     while (rs.next()) {
+                        Department department = new Department();
+                        department.setId(rs.getInt("department_id"));
+                        department.setName(rs.getString("name"));
+
                         student.setId(rs.getInt("id"));
                         student.setFirstName(rs.getString("first_name"));
                         student.setLastName(rs.getString("last_name"));
                         student.setAddress(rs.getString("address"));
-                        student.setDepartment((Department) rs.getObject("department_id"));
+                        student.setDepartment(department);
                     }
                 }
             }

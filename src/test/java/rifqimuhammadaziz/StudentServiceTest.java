@@ -57,8 +57,8 @@ public class StudentServiceTest {
     @Test
     public void testGetSingle() throws SQLException, ClassNotFoundException {
         studentDao = new StudentDaoImpl();
-        Integer id = 1;
-        student = studentDao.findById(1);
+        Integer id = 4;
+        student = studentDao.findById(id);
         System.out.println(student);
     }
 }
