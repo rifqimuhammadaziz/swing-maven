@@ -68,7 +68,7 @@ public class UserDaoImpl implements DaoService<User> {
     @Override
     public List<User> findByName(String name) throws SQLException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
-        String QUERY = "SELECT id, username, fullname, gender, address, phonenumber, status FROM user WHERE username = ?";
+        String QUERY = "SELECT id, username, fullname, gender, address, phonenumber, status FROM user WHERE fullname = ?";
         try (Connection connection = MySQLConnection.createConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
                 ps.setString(1, name);
