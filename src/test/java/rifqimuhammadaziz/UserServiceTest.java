@@ -3,6 +3,7 @@ package rifqimuhammadaziz;
 import com.github.javafaker.Faker;
 import org.junit.Test;
 import rifqimuhammadaziz.model.User;
+import rifqimuhammadaziz.service.StudentDaoImpl;
 import rifqimuhammadaziz.service.UserDaoImpl;
 
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ public class UserServiceTest {
 
     public UserDaoImpl userService;
     private List<User> users;
+    User user = new User();
 
     @Test
     public void testAddData() throws SQLException, ClassNotFoundException {
@@ -60,6 +62,14 @@ public class UserServiceTest {
         for (User user : users) {
             System.out.println(user);
         }
+    }
+
+    @Test
+    public void testFindById() throws SQLException, ClassNotFoundException {
+        userService = new UserDaoImpl();
+        Integer id = 1;
+        user = userService.findById(id);
+        System.out.println(user);
     }
 
 
