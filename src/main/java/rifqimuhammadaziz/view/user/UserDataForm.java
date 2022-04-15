@@ -114,37 +114,45 @@ public class UserDataForm extends JFrame{
             }
         });
 
+        // Button Refresh
         btnRefresh.addActionListener(e -> {
-            users.clear();
             try {
+                users.clear();
                 users.addAll(userDao.getAll());
+                userTableModel = new UserTableModel(users);
+                tableUser.setModel(userTableModel);
+                userTableModel.fireTableDataChanged();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
-            userTableModel.fireTableDataChanged();
-            JOptionPane.showMessageDialog(null, "Table Refreshed", "Load Data", JOptionPane.INFORMATION_MESSAGE);
+//            userTableModel.fireTableDataChanged();
+//            JOptionPane.showMessageDialog(null, "Table Refreshed", "Load Data", JOptionPane.INFORMATION_MESSAGE);
         });
 
+        // Button Search
         searchButton.addActionListener(e -> {
             String searchUser = (String) JOptionPane.showInputDialog(
                     null,
                     "Search User",
                     "Testing",
-                    JOptionPane.INFORMATION_MESSAGE
+                    JOptionPane.PLAIN_MESSAGE
             );
-            if (!searchUser.isEmpty()) {
+            if (searchUser != null) {
                 try {
                     List<User> found;
                     found = userDao.searchByName(searchUser);
-                    System.out.println(found);
+                    userTableModel = new UserTableModel(found);
+                    tableUser.setModel(userTableModel);
+                    tableUser.setAutoCreateRowSorter(true);
                 } catch (SQLException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
             }
         });
 
+        // Button Add
         addButton.addActionListener(e -> {
             RegisterForm frame = new RegisterForm();
             frame.setTitle("Register");
