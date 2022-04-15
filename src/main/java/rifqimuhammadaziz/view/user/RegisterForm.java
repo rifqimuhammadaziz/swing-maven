@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterForm {
+public class RegisterForm extends JFrame{
     private JTextField txtUsername;
     private JTextField txtFullName;
     private JRadioButton maleRadioButton;
@@ -31,8 +31,10 @@ public class RegisterForm {
     private UserDaoImpl userDao;
     private List<User> users;
 
-
     public RegisterForm() {
+        setContentPane(rootPanel);
+        pack();
+
         userDao = new UserDaoImpl();
         users = new ArrayList<>();
 
@@ -69,6 +71,7 @@ public class RegisterForm {
                             users.clear();
                             JOptionPane.showMessageDialog(rootPanel, "Success Add Data", "Success", JOptionPane.INFORMATION_MESSAGE);
                             resetTextfield();
+                            dispose();
                         }
                     } catch (SQLException | ClassNotFoundException ex) {
                         JOptionPane.showMessageDialog(rootPanel, "Failed to Add Data \nUsername " + txtUsername.getText() + " already Registered", "Register Failed", JOptionPane.ERROR_MESSAGE);
@@ -135,14 +138,14 @@ public class RegisterForm {
         });
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("RegisterForm");
-        frame.setContentPane(new RegisterForm().rootPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        JFrame frame = new JFrame("RegisterForm");
+//        frame.setContentPane(new RegisterForm().rootPanel);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.pack();
+//        frame.setLocationRelativeTo(null);
+//        frame.setVisible(true);
+//    }
 
     public ImageIcon resizeImage(String imagePath) {
         ImageIcon imageIcon = new ImageIcon(imagePath);

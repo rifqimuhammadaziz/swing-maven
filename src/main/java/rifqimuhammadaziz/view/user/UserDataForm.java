@@ -144,6 +144,14 @@ public class UserDataForm extends JFrame{
                 }
             }
         });
+
+        addButton.addActionListener(e -> {
+            RegisterForm frame = new RegisterForm();
+            frame.setTitle("Register");
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
