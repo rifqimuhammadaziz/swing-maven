@@ -6,12 +6,13 @@ import rifqimuhammadaziz.model.table.UserTableModel;
 import rifqimuhammadaziz.service.UserDaoImpl;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserDataForm extends JFrame{
@@ -21,6 +22,7 @@ public class UserDataForm extends JFrame{
     private JPanel rootPanel;
     private JButton addButton;
     private JButton searchButton;
+    private JTextField txtSearch;
 
     private UserDaoImpl userDao;
     private List<User> users;
@@ -127,8 +129,23 @@ public class UserDataForm extends JFrame{
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
-//            userTableModel.fireTableDataChanged();
-//            JOptionPane.showMessageDialog(null, "Table Refreshed", "Load Data", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                searchUser();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                searchUser();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                searchUser();
+            }
         });
 
         // Button Search
@@ -141,9 +158,9 @@ public class UserDataForm extends JFrame{
             );
             if (searchUser != null) {
                 try {
-                    List<User> found;
-                    found = userDao.searchByName(searchUser);
-                    userTableModel = new UserTableModel(found);
+                    users.clear();
+                    users.addAll(userDao.searchByName(searchUser));
+                    userTableModel = new UserTableModel(users);
                     tableUser.setModel(userTableModel);
                     tableUser.setAutoCreateRowSorter(true);
                 } catch (SQLException | ClassNotFoundException ex) {
@@ -185,9 +202,15 @@ public class UserDataForm extends JFrame{
 
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        ImageIcon icon = new ImageIcon("icon/icons8_refresh_30px.png");
-        addButton = new JButton("test", icon);
+    private void searchUser() {
+        try {
+            users.clear();
+            users.addAll(userDao.searchByName(txtSearch.getText()));
+            userTableModel = new UserTableModel(users);
+            tableUser.setModel(userTableModel);
+            tableUser.setAutoCreateRowSorter(true);
+        } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Notfound");
+        }
     }
 }
