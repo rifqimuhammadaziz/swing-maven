@@ -44,9 +44,9 @@ public class UserTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if (getValueAt(0, columnIndex) != null) {
-            return getValueAt(0, columnIndex).getClass();
-        }
+//        if (getValueAt(0, columnIndex) != null) {
+//            return getValueAt(0, columnIndex).getClass();
+//        }
         return Object.class;
     }
 }
